@@ -1,0 +1,32 @@
+<html>
+<head>
+<style>
+#line {
+    border: black solid 2px;
+}
+</style>
+</head>
+<body>
+    <div id="container">
+    </div>
+    <script>
+        fetch('/api')
+          .then(response => response.json())
+          .then(data => {
+              let html = '';
+
+              for (item of data.data) {
+                  html += `<h2>${item.text}</h2><ul>`; 
+                  
+                  for (choice of item.choices) {
+                      html += `<li>${choice}</li>`;
+                  }
+
+                  html += `</ul><h3>${item.answer}</h3><div id="line"></div>`; 
+              }
+
+              document.getElementById('container').innerHTML = html;
+          });
+    </script>
+</body>
+</html>

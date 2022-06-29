@@ -1,0 +1,36 @@
+<form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+    <div>
+        <input id="single" type="radio" name="questionType" formControlName="questionType" value="single">
+        <label for="single">Single Choice</label>
+    </div>
+    <div>
+        <input id="multiple" type="radio" name="questionType" formControlName="questionType" value="multiple">
+        <label for="single">Multiple Choice</label>
+    </div>
+    <div>
+        <textarea formControlName="text"></textarea>
+    </div>
+    <div>
+        Choice #1 is the correct answer? 
+        <input type="checkbox" formControlName="correctAnswerOne" />
+        <input type="text" formControlName="choiceOne" />
+    </div>
+    <div>
+        Choice #2 is the correct answer? 
+        <input type="checkbox" formControlName="correctAnswerTwo" />
+        <input type="text" formControlName="choiceTwo" />
+    </div>
+    <div>
+        Choice #3 is the correct answer? 
+        <input type="checkbox" formControlName="correctAnswerThree" />
+        <input type="text" formControlName="choiceThree" />
+    </div>
+    <div>
+        Choice #4 is the correct answer? 
+        <input type="checkbox" formControlName="correctAnswerFour" />
+        <input type="text" formControlName="choiceFour" />
+    </div>
+    <div>
+        <button type="submit">Create</button>
+    </div>
+</form>

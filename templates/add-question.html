@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    
+    <title>Text Input Form</title>
+</head>
+<body>
+<div class="max-w-screen-md mx-auto p-5">
+    <div class="text-center mb-16">
+        <p class="mt-4 text-sm leading-7 text-gray-500 font-regular uppercase">
+            Quiz
+        </p>
+        <h3 class="text-3xl sm:text-4xl leading-normal font-extrabold tracking-tight text-gray-900">
+            Add a <span class="text-indigo-600">Question</span>
+        </h3>
+    </div>
+    <form action="http://localhost:8083/add-question" data-question-form-count="4" id="question-form" method="post" class="w-full">
+        <div>
+            <input type="radio" value="single" id="choice1" name="choiceType" checked="checked">
+            <label class="radio" for="choice1">Single Choice</label>
+            <input type="radio" value="multiple" id="choice2" name="choiceType">
+            <label class="radio" for="choice2">Multiple Choice</label>
+        </div>
+
+        
+        <div class="flex flex-wrap flex-col -mx-3 mb-6">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                Question Text
+                
+            </label>
+            <div class="flex">
+                <div class="w-1/2 mr-4">
+                 <textarea type="text" id="question-text" rows="10" cols="30" class="appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="text"></textarea>
+                </div>
+                <div class="w-1/2">
+                    <div id="question-text-preview" class="w-full appearance-none block bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"></div>
+                </div>
+            </div>
+            <div id="choice-input-form-list">
+                <div>
+                    <div id="choice-input-1">
+    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2">
+        Choice #1
+    </label>
+    <label>
+        Is correct answer?
+    </label>
+    <input type="checkbox" id="choices0.correctAnswer1" name="choices[0].correctAnswer" value="true"><input type="hidden" name="_choices[0].correctAnswer" value="on">
+    <input type="text" class="mb-0 appearance-none w-11/12 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="choices0.choice" name="choices[0].choice" value="">
+    
+    
+    
+</div>
+                </div>
+                <div>
+                    <div id="choice-input-2">
+    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2">
+        Choice #2
+    </label>
+    <label>
+        Is correct answer?
+    </label>
+    <input type="checkbox" id="choices1.correctAnswer1" name="choices[1].correctAnswer" value="true"><input type="hidden" name="_choices[1].correctAnswer" value="on">
+    <input type="text" class="mb-0 appearance-none w-11/12 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="choices1.choice" name="choices[1].choice" value="">
+    
+    
+    
+</div>
+                </div>
+                <div>
+                    <div id="choice-input-3">
+    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2">
+        Choice #3
+    </label>
+    <label>
+        Is correct answer?
+    </label>
+    <input type="checkbox" id="choices2.correctAnswer1" name="choices[2].correctAnswer" value="true"><input type="hidden" name="_choices[2].correctAnswer" value="on">
+    <input type="text" class="mb-0 appearance-none w-11/12 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="choices2.choice" name="choices[2].choice" value="">
+    
+    
+    
+</div>
+                </div>
+                <div>
+                    <div id="choice-input-4">
+    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2">
+        Choice #4
+    </label>
+    <label>
+        Is correct answer?
+    </label>
+    <input type="checkbox" id="choices3.correctAnswer1" name="choices[3].correctAnswer" value="true"><input type="hidden" name="_choices[3].correctAnswer" value="on">
+    <input type="text" class="mb-0 appearance-none w-11/12 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="choices3.choice" name="choices[3].choice" value="">
+    <span hx-trigger="click" hx-target="#quiz" hx-swap="outerHTML" class="w-1/12 text-red-700" hx-post="/delete-choice?index=4">
+        <i class="fa fa-minus-circle" aria-hidden="true"></i>
+    </span>
+    <span hx-trigger="click" hx-target="#choice-input-form-list" hx-swap="beforeend" class="w-1/12 text-indigo-700" hx-get="/add-choice?index=4">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+    </span>
+    
+</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-end">
+            <button data-modal-toggle="popup-modal" type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Create
+            </button>
+        </div>
+    </form>
+</div>
+<script>
+const question_form = document.getElementById("question-form");
+
+question_form.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const form_data = new FormData(form);
+    
+    fetch('/api/formadd', {method: 'POST', body: form_data});
+});
+</script>
+
+</body></html>
